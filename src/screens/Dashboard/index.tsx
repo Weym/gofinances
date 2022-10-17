@@ -1,5 +1,6 @@
 import React from 'react';
-import { RFValue } from 'react-native-responsive-fontsize';
+
+import { HighlightCard } from '../../components/HighlightCard';
 
 import {
   Container,
@@ -11,6 +12,7 @@ import {
   UserGreeting,
   UserName,
   Icon,
+  HighlightCards,
 } from './styles';
 
 export function Dashboard() {
@@ -28,6 +30,11 @@ export function Dashboard() {
           <Icon name="power" />
         </UserWrapper>
       </Header>
+      <HighlightCards>
+        <HighlightCard />
+        <HighlightCard />
+        <HighlightCard />
+      </HighlightCards>
     </Container>
   );
 }
