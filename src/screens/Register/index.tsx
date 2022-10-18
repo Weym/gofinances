@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import * as Yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { Alert, Keyboard, Modal, TouchableWithoutFeedback } from 'react-native';
+import { Alert, Keyboard, Modal } from 'react-native';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 import { CategorySelect } from '../CategorySelect';
 import { Button } from '../../components/Forms/Button';
@@ -15,6 +16,7 @@ import { Container, Header, Title, Form, Fields, TransactionsTypes } from './sty
 const schema = Yup.object().shape({
   name: Yup.string().required('Nome é obrigatório'),
   amount: Yup.number()
+    .required('Preço é obrigatório')
     .typeError('Informe um valor numerico')
     .positive('O valor não pode ser negativo'),
 });
@@ -43,9 +45,11 @@ export function Register() {
 
   function handleOpenSelectCategoryModal() {
     setCategoryModalOpen(true);
+    console.log('Modal abrir  clicado');
   }
 
   function handleCloseSelectCategoryModal() {
+    console.log('Modal fechado  clicado');
     setCategoryModalOpen(false);
   }
 
@@ -55,7 +59,10 @@ export function Register() {
   }
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+    <TouchableWithoutFeedback
+      onPress={Keyboard.dismiss}
+      containerStyle={{ flex: 1 }}
+      style={{ flex: 1 }}>
       <Container>
         <Header>
           <Title>Cadastro</Title>
