@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Alert, Keyboard, Modal } from 'react-native';
 import * as Yup from 'yup';
 import uuid from 'react-native-uuid';
@@ -45,8 +45,6 @@ export function Register() {
     name: 'Categoria',
   });
 
-  const dataKey = '@gofinance:transactions';
-
   function handleTransactionsTypesSelect(type: 'up' | 'down') {
     setTransactionType(type);
   }
@@ -67,23 +65,29 @@ export function Register() {
       id: String(uuid.v4()),
       name: form.name,
       amount: form.amount,
-      transactionType,
+      type: transactionType,
       category: category.key,
       date: new Date(),
     };
 
     try {
+      const dataKey = '@gofinance:transactions';
+
       const data = await AsyncStorage.getItem(dataKey);
       const currentData = data ? JSON.parse(data) : [];
       const dataFormatted = [...currentData, newTransaction];
 
+      console.log(dataFormatted);
+
       await AsyncStorage.setItem(dataKey, JSON.stringify(dataFormatted));
+
       reset();
       setTransactionType('');
       setCategory({
         key: 'category',
         name: 'Categoria',
       });
+
       navigation.navigate('Listagem');
     } catch (error) {
       console.log(error);
