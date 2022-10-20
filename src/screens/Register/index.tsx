@@ -19,7 +19,7 @@ import { Container, Header, Title, Form, Fields, TransactionsTypes } from './sty
 const schema = Yup.object().shape({
   name: Yup.string().required('Nome é obrigatório'),
   amount: Yup.number()
-    .required('Preço é obrigatório')
+    .required('O valor é obrigatório')
     .typeError('Informe um valor numerico')
     .positive('O valor não pode ser negativo'),
 });
